@@ -1,0 +1,4 @@
+event id,name,user,activities,topics,meet in,location,table number,restaurant id
+4,Group 1,won@mail.com,"Arts & Crafts, Pickleball, Volleyball","Hobbies, Science","January 2nd, 2025 07:00 PM",,Ebra,1
+4,Group 1,test_2@mail.com,"Arts & Crafts, Pickleball, Volleyball","Hobbies, Science","January 2nd, 2025 07:00 PM",1,Ebra,2
+4,Group 1,test_3@mail.com,"Arts & Crafts, Pickleball, Volleyball","Hobbies, Science","January 2nd, 2025 07:00 PM",1,Ebra,1
