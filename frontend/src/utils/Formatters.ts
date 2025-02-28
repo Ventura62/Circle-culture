@@ -1,3 +1,6 @@
+import { format, parseISO, isValid } from "date-fns";
+
+
 export function formatPhoneNumber(input: string | null): string | null {
   if (!input) return null;
   // Ensure input is only digits
@@ -167,3 +170,19 @@ export function transformKeys(obj: unknown): unknown {
   }
   return obj;
 }
+
+
+
+
+export const formattedDate = (data) => {
+    const dateStr = data?.timeSlots?.[0]?.datetime;
+    if (!dateStr) return "No date available";
+
+    const date = parseISO(dateStr);
+    if (!isValid(date)) {
+        console.error("Invalid date:", dateStr);
+        return "Invalid date";
+    }
+
+    return format(date, "MMM. d 'at' h a");
+};
