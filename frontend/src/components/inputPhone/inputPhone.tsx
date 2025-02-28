@@ -58,7 +58,7 @@ export function InputPhone<T extends FieldValues>({
     onEditPress?: () => void;
     readonly?: boolean;
 }) {
-    const [country, setCountry] = useState(null);
+    const [country, setCountry] = useState(countryOptions[0].code);
 
     return (
         <div className="mb-4">
@@ -72,7 +72,6 @@ export function InputPhone<T extends FieldValues>({
                             <Select value={country} onValueChange={setCountry}>
                                 <SelectTrigger className="w-fit border-none bg-transparent">
                                     <div className="flex flex-col justify-start">
-                                        {!country && countryOptions[0].icon}
                                         {country &&
                                             countryOptions.filter(
                                                 (c) => c.code === country
