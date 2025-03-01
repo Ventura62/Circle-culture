@@ -38,7 +38,7 @@ const Dropdown = (props: Props) => {
       setWidth(`${triggerRef.current.offsetWidth}px`);
     }
   }, [open]);
-  
+
   const handleClick = (item: string | number) => {
     props.setValue?.(item);
     setOpen(false);
