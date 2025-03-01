@@ -26,12 +26,14 @@ import { CircleCategoryEnum, CircleCriteriaEnum } from "@/models/Circle";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TrashIcon from "@/assets/images/TrashIcon";
+import Textarea from "@/components/shared/TextArea/TextArea";
 
 type tParams = Promise<{ slug: string }>;
 
 interface EditCircleForm {
     name: string;
     price: number;
+    description: string;
     // category: string;
     // genders: string;
 }
@@ -206,17 +208,6 @@ const CircleInfo = ({ params }: { params: tParams }) => {
                         placeholder="Circle Name"
                         title="Circle Name"
                     />
-                    <Input
-                        register={register}
-                        required="Price is Required"
-                        error={errors.price?.message}
-                        name="price"
-                        className="bg-primary !w-full"
-                        type="number"
-                        prefix="USD"
-                        placeholder="Price"
-                        title="Price"
-                    />
                     <div className="w-full text-left flex flex-col gap-2">
                         <h1>Category</h1>
                         <Dropdown
@@ -244,6 +235,49 @@ const CircleInfo = ({ params }: { params: tParams }) => {
                                 )
                             }
                         />
+                        <div className="flex flex-row gap-10">
+                                <div className="flex flex-col w-1/2">
+                                <Input
+                                    register={register}
+                                    required="Initial Ticket Price is Required"
+                                    error={errors.price?.message}
+                                    name="price"
+                                    className="!bg-primary !w-full"
+                                    type="number"
+                                    placeholder="$16"
+                                    title="Initial Ticket Price"
+                                />
+                                <p className="text-sm text-white text-opacity-60">
+                                    Earning with 6 guests: $76.8
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col w-1/2 ">
+                                <Input
+                                    register={register}
+                                    required="Discounted Ticket Price is Required"
+                                    error={errors.price?.message}
+                                    name="price"
+                                    className="!bg-primary !w-full"
+                                    type="number"
+                                    placeholder="$0"
+                                    title="Discounted Ticket Price"
+                                />
+                                <p className="text-sm text-white text-opacity-60">
+                                    Earning with 6 guests: $0
+                                </p>
+                            </div>
+                        </div>
+                        <Textarea
+                            register={register}
+                            required="Description is required"
+                            error={errors.description?.message}
+                            name="description"
+                            className="!bg-primary !w-full"
+                            placeholder="Circle Description goes here"
+                            title="The Vibes"
+                        />
+
                     </div>
 
                     <button

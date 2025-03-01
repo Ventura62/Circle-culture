@@ -75,11 +75,11 @@ const Input = <T extends FieldValues>({
             onChange={onChange}
             placeholder={placeholder}
             maxLength={maxLength}
-            className="outline-none flex-1 bg-transparent"
+            className="outline-none flex-1 bg-transparent placeholder:text-[#FFFFFF4D] placeholder:font-semibold placeholder:text-lg"
           />
         </div>
       </div>
-      {suffix && <span className="text-sm">{suffix}</span>}
+      {suffix && <span className="text-sm ">{suffix}</span>}
       {maxLength && (
         <p className="text-xs relative left-1 top-1">
           {(value as string).length}/{maxLength}
