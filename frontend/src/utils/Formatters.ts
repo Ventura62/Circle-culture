@@ -1,3 +1,6 @@
+import { format, parseISO, isValid } from "date-fns";
+
+
 export function formatPhoneNumber(input: string | null): string | null {
   if (!input) return null;
   // Ensure input is only digits
@@ -166,4 +169,33 @@ export function transformKeys(obj: unknown): unknown {
     }, {} as Record<string, unknown>);
   }
   return obj;
+}
+
+export const formattedDate = (data) => {
+    const dateStr = data?.timeSlots?.[0]?.datetime;
+    if (!dateStr) return "No date available";
+
+    const date = parseISO(dateStr);
+    if (!isValid(date)) {
+        console.error("Invalid date:", dateStr);
+        return "Invalid date";
+    }
+
+    return format(date, "MMM. d 'at' h a");
+};
+
+
+export const formatStatusToColors = (status: string) => {
+    switch (status) {
+        case "ACTIVE":
+            return "after:bg-[#0EAD00]";
+        case "CONFIRMED":
+            return "after:bg-[#0EAD00]";
+        case "ATTENDED":
+            return "after:bg-[#0EAD00]";
+        case "PENDING":
+            return "after:bg-[#EEFF00]";
+        default:
+            return "after:bg-[#37577E]";
+    }
 }

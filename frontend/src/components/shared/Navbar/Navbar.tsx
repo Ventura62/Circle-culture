@@ -13,72 +13,85 @@ import { useRouter } from "next/router";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
-  const { user, isLoggedIn } = useLocalUserContext();
-  console.log(user, isLoggedIn);
-  return (
-    <div>
-      <div className="md:flex hidden h-12 px-8 pt-12 pb-8  items-center justify-between mb-8 overflow-hidden">
-        <Link href="/home" className="flex-1">
-          <Image className="h-auto w-10" width={48} height={48} src="/logo.png" alt="72 Circle Logo" />
-        </Link>
+    const { user, isLoggedIn } = useLocalUserContext();
+    console.log(user, isLoggedIn);
+    return (
+        <div>
+            <div className="md:flex hidden h-12 px-8 pt-12 pb-8  items-center justify-between mb-8 overflow-hidden">
+                <Link href="/home" className="flex-1">
+                    <Image
+                        className="h-auto w-10"
+                        width={48}
+                        height={48}
+                        src="/logo.png"
+                        alt="72 Circle Logo"
+                    />
+                </Link>
 
-        <div className="flex-1 flex items-center justify-end gap-3.5">
-          {user && <NotificationDropdown />}
-          {isLoggedIn ? <Dropdown /> : <GuestDropDown />}
+                <div className="flex-1 flex items-center justify-end gap-3.5">
+                    {user && <NotificationDropdown />}
+                    {isLoggedIn ? <Dropdown /> : <GuestDropDown />}
+                </div>
+            </div>
+            <div className="md:hidden">
+                <MobileNavbar user={user} />
+            </div>
         </div>
-      </div>
-      <div className="md:hidden">
-        <MobileNavbar user={user} />
-      </div>
-    </div>
-  );
+    );
 };
 const MobileNavbar = ({ user }: { user: User }) => {
-  const route = useRouter();
-  const navRoutes = [
-    {
-      url: "/home",
-      name: "Explore",
-      icon: faMagnifyingGlass,
-    },
-    {
-      url: "/user/hangouts",
-      name: "Circle",
-      icon: faCircle,
-    },
-    {
-      url: "/user/notifications",
-      name: "Notifications",
-      icon: faBell,
-    },
-    {
-      url: "/user/account",
-      name: "Profile",
-      icon: faUser,
-    },
-  ];
-  return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className=" fixed bottom-0 rounded-t-lg  z-50   bg-primary drop-shadow-lg w-[100vw] items-center h-16 flex justify-evenly"
-    >
-      {navRoutes.map((routeData) => {
-        return (
-          <Link
-            href={routeData.url}
-            className={cn("flex  justify-center gap-1 flex-col items-center w-[80px] opacity-100", {
-              "opacity-60": routeData.url !== route.pathname,
+    const route = useRouter();
+    const navRoutes = [
+        {
+            url: "/home",
+            name: "Explore",
+            icon: faMagnifyingGlass,
+        },
+        {
+            url: "/user/hangouts",
+            name: "Circlce",
+            icon: faCircle,
+        },
+        {
+            url: "/user/notifications",
+            name: "Notifications",
+            icon: faBell,
+        },
+        {
+            url: "/user/account",
+            name: "Profile",
+            icon: faUser,
+        },
+    ];
+    return (
+        <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className=" fixed bottom-0 rounded-t-lg  z-50   bg-primary drop-shadow-lg w-[100vw] items-center h-16 flex justify-evenly"
+        >
+            {navRoutes.map((routeData, idx) => {
+                return (
+                    <Link
+                        key={idx}
+                        href={routeData.url}
+                        className={cn(
+                            "relative flex justify-center gap-1 flex-col items-center w-[80px] opacity-100",
+                            {
+                                "opacity-60": routeData.url !== route.pathname,
+                            }
+                        )}
+                    >
+                        {routeData.url === route.pathname && (
+                            <div className="absolute inset-x-0 h-1 rounded-full bg-white -top-2.5"></div>
+                        )}
+                        <FontAwesomeIcon icon={routeData.icon} />
+                        <p>{routeData.name}</p>
+                    </Link>
+                );
             })}
-          >
-            <FontAwesomeIcon icon={routeData.icon} />
-            <p>{routeData.name}</p>
-          </Link>
-        );
-      })}
-    </motion.div>
-  );
+        </motion.div>
+    );
 };
 
 export default Navbar;
