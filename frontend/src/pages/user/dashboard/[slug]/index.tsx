@@ -33,9 +33,10 @@ type tParams = Promise<{ slug: string }>;
 interface EditCircleForm {
     name: string;
     price: number;
+    discount : number;
     description: string;
-    // category: string;
-    // genders: string;
+    category: string;
+    genders: string;
 }
 
 const items = [
@@ -235,8 +236,8 @@ const CircleInfo = ({ params }: { params: tParams }) => {
                                 )
                             }
                         />
-                        <div className="flex flex-row gap-10">
-                                <div className="flex flex-col w-1/2">
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-10">
+                            <div className="flex flex-col w-full md:w-1/2">
                                 <Input
                                     register={register}
                                     required="Initial Ticket Price is Required"
@@ -252,11 +253,11 @@ const CircleInfo = ({ params }: { params: tParams }) => {
                                 </p>
                             </div>
 
-                            <div className="flex flex-col w-1/2 ">
+                            <div className="flex flex-col w-full md:w-1/2">
                                 <Input
                                     register={register}
                                     required="Discounted Ticket Price is Required"
-                                    error={errors.price?.message}
+                                    error={errors.discount?.message}
                                     name="price"
                                     className="!bg-primary !w-full"
                                     type="number"
